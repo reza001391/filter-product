@@ -5,6 +5,7 @@ const filters = {
 };
 const searchInput = document.querySelector("#search");
 const productCenter = document.querySelector(".products-center");
+const btns = document.querySelectorAll(".btn");
 // DOM CONTENT LOADED ----------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   axios.get("http://localhost:3000/items").then((res) => {
@@ -49,3 +50,12 @@ searchInput.addEventListener("input", (e) => {
   console.log(e.target.value);
 });
 ``;
+
+btns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const filter = e.target.dataset.filter;
+    console.log(filter);
+    filters.searchItems = filter;
+    renderProducts(allProducts, filters);
+  });
+});
